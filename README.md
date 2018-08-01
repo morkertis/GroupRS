@@ -1,2 +1,2 @@
-# RS2
+# GroupRS
 Group Recommender systems based of MCS model
