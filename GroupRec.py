@@ -305,20 +305,6 @@ class GroupRec():
 
     def NDCG(self, group, groupTrain, groupTest, recommended):
 
-        #        print(groupTest)
-
-        #        #TODO remove when get recommended**********************************
-        #
-        #        data = pa.read_csv("groupTestRec.csv")
-        #        data_to_records=data.to_records(index=False)
-        #        for m,r in data_to_records:
-        #            if m in recommended:
-        #                continue
-        #            else:
-        #                recommended[m] = r
-        ##        print(recommended)
-        #        #TODO remove when get recommended**********************************
-
         recommendedDF = pa.DataFrame.from_dict(recommended, orient='index').reset_index().rename(
             columns={'index': 'movieIdRec', 0: 'ratingRec'})  # .sort_values(by=['ratingRec'], ascending=False)
         #        print(recommendedDF)
@@ -338,16 +324,7 @@ class GroupRec():
         return ndcg / index
 
     def Fmeasure(self, group, groupTrain, groupTest, recommended, Fthreshold):
-        ##        #TODO remove when get recommended**********************************
-        #        recommended={}
-        #        data = pa.read_csv("groupTestRec.csv")
-        #        data_to_records=data.to_records(index=False)
-        #        for m,r in data_to_records:
-        #            if m in recommended:
-        #                continue
-        #            else:
-        #                recommended[m] = r
-        ##        #TODO remove when get recommended**********************************
+
         recommendedDF = pa.DataFrame.from_dict(recommended, orient='index').reset_index().rename(
             columns={'index': 'movieIdRec', 0: 'ratingRec'})
         df = pa.merge(groupTest, recommendedDF, left_on=['movieId'], right_on=['movieIdRec'], how='inner')
